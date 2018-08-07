@@ -1,1 +1,1 @@
-# MiBand-2-graph
+# MiBand-2 Heart rate collector
