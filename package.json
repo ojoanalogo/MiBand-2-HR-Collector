@@ -1,0 +1,31 @@
+{
+  "name": "miband-2-graph",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "browserify ./src/app.js > ./public/bundle.js",
+    "serve": "npx static-server -cdi ./public/index.html",
+    "dev": "nodemon"
+  },
+  "author": "Alfonso Reyes",
+  "license": "ISC",
+  "dependencies": {
+    "bulma": "^0.7.1",
+    "csv-stringify": "^3.1.1",
+    "jquery": "^3.3.1",
+    "jsdom": "^11.12.0",
+    "miband": "^0.1.4",
+    "static-server": "^2.2.1"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.0.0-beta.56",
+    "@types/web-bluetooth": "0.0.4",
+    "babelify": "^9.0.0",
+    "browserify": "^16.2.2",
+    "nodemon": "^1.18.3",
+    "tsify": "^4.0.0",
+    "typescript": "^3.0.1"
+  }
+}
