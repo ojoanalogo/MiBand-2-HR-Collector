@@ -125,7 +125,7 @@ class MiBand {
                 labels: [],
                 datasets: [{
                     label: 'Heart rate value',
-                    data: [0],
+                    data: [],
                     backgroundColor: [
                         'rgba(255, 99, 132, 0.2)'
                     ],
