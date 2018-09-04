@@ -69,8 +69,11 @@ class MiBand {
             await this.band.hrmStart();
             if ($('#time').val()) {
                 const time = $('#time').val();
+                this.delay(ms(time));
                 await this.delay(ms(time)).then(() => {
-                    this.stopMedition();
+                    this.band.hrmStop().then(() => {
+                        this.stopMedition();
+                    });
                 });
             }
         } catch (error) {
@@ -78,11 +81,10 @@ class MiBand {
         }
     }
     stopMedition() {
-        this.band.hrmStop();
-        this.log('Stopping medition...');
         const csv = this.convertArrayOfObjectsToCSV(this.dataStore);
         const name = $('#name').val() || 'data';
         const hiddenElement = document.createElement('a');
+        this.log('Saving data (' + name + '.csv' + ')...');
         hiddenElement.href = 'data:text/csv;charset=utf-8,' + encodeURI(csv);
         hiddenElement.target = '_blank';
         hiddenElement.download = name + '.csv';
@@ -159,7 +161,7 @@ class MiBand {
             dataset.data.push(data);
         });
         this.chart.update();
-}
+    }
 }
 
 new MiBand();
