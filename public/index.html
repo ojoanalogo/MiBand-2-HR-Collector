@@ -11,137 +11,83 @@
     <style>
         html,
         body {
-            background: #159957;
-            /* fallback for old browsers */
-            background: -webkit-linear-gradient(to right, #159957, #155799);
-            /* Chrome 10-25, Safari 5.1-6 */
-            background: linear-gradient(to right, #159957, #155799);
-            /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+            background-image: linear-gradient(120deg, #a6c0fe 0%, #f68084 100%);
         }
-
-        /* animate the hearbeat increasing its horizontal size more than its vertical */
-
-        @keyframes heartbeat {
-            to {
-                /*     rotate is included to maintain the rotation introduced briefly after */
-                transform: scaleX(1.4) scaleY(1.3) rotate(-45deg);
-            }
-        }
-
-        .heart-icon:hover {
-            animation-duration: 0.2s;
-        }
-
-        /* to create the heart you can use a square div and absolute position two circles through pseudo elements
-
-position these pseudo elements at either end of the square with top/right/bottom/left properties
-*/
-
-        .heart-icon {
-            background-color: #ff6058;
-            height: 32px;
-            width: 32px;
-            /* rotate the square as to create the core of the heart icon */
-            transform: rotate(-45deg);
-            /*   call the animation on the element, which will affect the pseudo-elements as well */
-            animation: heartbeat 1s alternate infinite;
-        }
-
-        /* on hover fasten the animation as to give the impression of a faster heartbeat */
-
-        .heart-icon:after {
-            /*   by setting the color to inherit the pseudo element takes the color of the connected element */
-            background-color: inherit;
-            content: "";
-            border-radius: 50%;
-            position: absolute;
-            /* the pseudo elements ought to be positioned halfway through the square; therefore they are offset by half of the chosen width/height */
-            width: 32px;
-            height: 32px;
-            top: 0;
-            left: calc(32px/2);
-        }
-
-        .heart-icon:before {
-            content: "";
-            background-color: inherit;
-            border-radius: 50%;
-            position: absolute;
-            width: 32px;
-            height: 32px;
-            top: calc(32px/-2);
-            left: 0;
+        .field-label {
+            text-align: left;
         }
     </style>
 </head>
 
 <body>
 
-                <div class="hero-body">
-    <section class="container">
-        <div class="sandbox">
-            <div class="tile is-ancestor">
-                <div class="tile is-parent is-6 is-shady">
-                    <article class="tile is-child notification is-gray">
-                        <p class="title">📜 Salida de datos </p>
-                        <div class="content">
-                            <pre style="display: block; height: 80vh; overflow: auto;" id="output">...</pre>
-                        </div>
-                    </article>
-                </div>
-                <div class="tile is-vertical">
-                    <div class="tile is-parent is-shady">
-                        <article class="tile is-child notification is-white">
-                            <p class="title">⌚💓 Recolector de ritmo cardiaco</p>
-                            <p class="subtitle is-gray">versión 0.1</p>
+    <div class="hero-body">
+        <section class="container">
+            <div class="sandbox">
+                <div class="tile is-ancestor">
+                    <div class="tile is-parent is-6 is-shady">
+                        <article class="tile is-child notification is-gray">
+                            <p class="title">📜 Data output </p>
                             <div class="content">
-                                <p>Es necesario contar con un equipo con conectividad bluetooth compatible con BLE</p>
-                                <div class="field is-horizontal">
-                                    <div class="field-label is-normal">
-                                        <label class="label">📝 Nombre del archivo</label>
+                                <pre style="display: block; height: 80vh; overflow: auto;" id="output">...</pre>
+                            </div>
+                        </article>
+                    </div>
+                    <div class="tile is-vertical">
+                        <div class="tile is-parent is-shady">
+                            <article class="tile is-child notification is-white">
+                                <p class="title">⌚💓 MiBand data recolector</p>
+                                <p class="subtitle is-gray">version 0.2</p>
+                                <div class="content">
+                                    <p>You will need a device with BLE connectitity to use this tool</p>
+                                    <div class="field-label is-medium">
+                                        <p class="label">📝 CSV file name for output</p>
                                     </div>
-                                    <div class="field-body">
-                                        <div class="field">
-                                            <p class="control">
-                                                <input id="nombre" class="input" placeholder="algo.csv">
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="field is-horizontal">
-                                        <div class="field-label is-normal">
-                                            <label class="label">⌚ Tiempo (minutos)</label>
-                                        </div>
+                                    <div class="field is-horizontal">
                                         <div class="field-body">
                                             <div class="field">
                                                 <p class="control">
-                                                    <input id="tiempo" type="number" class="input" min="0" max="60" placeholder="5">
+                                                    <input id="name" class="input" placeholder="something">
                                                 </p>
                                             </div>
                                         </div>
                                     </div>
-                                    <p class="has-text-grey">Dejar en blanco para correr indefinidamente</p>
+                                    <div class="field-label is-medium">
+                                        <p class="label">⌚ Time (you can use format like "5s, 5m, 1hr...")</p>
+                                    </div>
+                                    <div class="field is-horizontal">
+                                        <div class="field-body">
+                                            <div class="field">
+                                                <p class="control">
+                                                    <input id="time" class="input" placeholder="5m">
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <p class="has-text-grey">Leave blank to run until you press stop button</p>
 
-                                <br>
-                                <p class="has-text-centered">
-                                    <a href="#" id="iniciar" class="button is-medium is-success">
-                                        Iniciar ✅
-                                    </a>
-                                    <a href="#" id="parar" hidden class="button is-medium is-danger">
-                                        Parar ❌
-                                    </a>
-                                </p>
-                            </div>
-                        </article>
+                                    <br>
+                                    <p class="has-text-centered">
+                                        <a href="#" id="start" class="button is-medium is-success">
+                                            Start ✅
+                                        </a>
+                                        <a href="#" id="stop" hidden class="button is-medium is-danger">
+                                            Stop ❌
+                                        </a>
+                                    </p>
+                                </div>
+                                <div class="chart-container" style="height:400px; width:auto;">
+                                    <canvas id="chart"></canvas>
+                                </div>
+                            </article>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
-</div>
+        </section>
+    </div>
+    <script src="../node_modules/chart.js/dist/Chart.bundle.min.js"></script>
     <script src="../public/bundle.js"></script>
-
 </body>
 
 </html>
