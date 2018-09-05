@@ -19,7 +19,7 @@ based on https://github.com/vshymanskyy/miband-js, modified to save csv files
 * CSV data saving
   - If you are into data anaylisis i think this is the format you may want to use when using timeseries
 * Configurable timer
-  - Sometimes you only need to run for a few minutes or hours without supervision, uses the awesome package of ms (https://nodejs.org/es/)
+  - Sometimes you only need to run for a few minutes or hours without supervision, uses the awesome package of ms (https://www.npmjs.com/package/ms)
 
 ## How to use
 
