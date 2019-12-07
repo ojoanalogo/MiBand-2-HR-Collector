@@ -60,12 +60,13 @@ class MiBand {
                 this.log('<span class="has-text-danger">❤</span> Heart Rate: ' + rate)
                 const time = Date.now();
                 this.dataStore.push({ time: time, val: rate });
+
                 const timeF = new Date(time);
-                const label = timeF.getHours() + ":" + timeF.getMinutes();
+                const label = timeF.getHours() + ":" + timeF.getMinutes() + ":" + timeF.getSeconds();
                 this.updateChart(label, rate);
             });
             const date = new Date();
-            this.log('Start hour: ' + date.getHours() + ':' + date.getMinutes());
+            this.log('Start hour: ' + date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds());
             await this.band.hrmStart();
             if ($('#time').val()) {
                 const time = $('#time').val();
@@ -85,6 +86,9 @@ class MiBand {
         const name = $('#name').val() || 'data';
         const hiddenElement = document.createElement('a');
         this.log('Saving data (' + name + '.csv' + ')...');
+
+        const finishDate = new Date();
+        this.log("Process finished at: " + finishDate.getHours() + ':' + finishDate.getMinutes() + ':' + finishDate.getSeconds())
         hiddenElement.href = 'data:text/csv;charset=utf-8,' + encodeURI(csv);
         hiddenElement.target = '_blank';
         hiddenElement.download = name + '.csv';
@@ -97,22 +101,27 @@ class MiBand {
             return null;
         }
 
-        columnDelimiter = ',';
+
         lineDelimiter = '\n';
 
         keys = Object.keys(data[0]);
 
         result = '';
-        result += keys.join(columnDelimiter);
-        result += lineDelimiter;
 
-        data.forEach(function (item) {
-            ctr = 0;
-            keys.forEach(function (key) {
-                if (ctr > 0) result += columnDelimiter;
+        var indexCorrect = 0
 
-                result += item[key];
-                ctr++;
+        data.forEach(function(item) {
+
+            keys.forEach(function(key) {
+
+                if (indexCorrect % 2 == 0) {
+                    //Value is not correct
+                } else {
+                    //In this case value is correct,add to result
+                    result += item[key];
+                }
+
+                indexCorrect++;
             });
             result += lineDelimiter;
         });
