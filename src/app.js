@@ -57,15 +57,18 @@ class MiBand {
             await this.band.showNotification('message');
             await this.delay(1000);
             this.band.on('heart_rate', (rate) => {
-                this.log('<span class="has-text-danger">❤</span> Heart Rate: ' + rate)
                 const time = Date.now();
-                this.dataStore.push({ time: time, val: rate });
                 const timeF = new Date(time);
+                var formattedCurrentHour = timeF.getHours() + ":" + timeF.getMinutes() + ":" + timeF.getSeconds();
+                this.dataStore.push({ time: timeF.getHours() + "-" + timeF.getMinutes() + "-" + timeF.getSeconds(), val: rate });
+
+                this.log('<span class="has-text-danger">❤</span> Heart Rate: ' + rate + ' || Time: ' + formattedCurrentHour)
+
                 const label = timeF.getHours() + ":" + timeF.getMinutes();
                 this.updateChart(label, rate);
             });
             const date = new Date();
-            this.log('Start hour: ' + date.getHours() + ':' + date.getMinutes());
+            this.log('Start hour: ' + date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds());
             await this.band.hrmStart();
             if ($('#time').val()) {
                 const time = $('#time').val();
@@ -73,6 +76,7 @@ class MiBand {
                 await this.delay(ms(time)).then(() => {
                     this.band.hrmStop().then(() => {
                         this.stopMedition();
+
                     });
                 });
             }
@@ -106,9 +110,9 @@ class MiBand {
         result += keys.join(columnDelimiter);
         result += lineDelimiter;
 
-        data.forEach(function (item) {
+        data.forEach(function(item) {
             ctr = 0;
-            keys.forEach(function (key) {
+            keys.forEach(function(key) {
                 if (ctr > 0) result += columnDelimiter;
 
                 result += item[key];
