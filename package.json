@@ -1,8 +1,7 @@
 {
   "name": "miband-2-graph",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "version": "1.0.3",
+  "description": "Mi band 2 heart rate recolection tool",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "browserify ./src/app.js > ./public/bundle.js",
@@ -12,22 +11,21 @@
   "author": "Alfonso Reyes",
   "license": "ISC",
   "dependencies": {
-    "bulma": "^0.7.1",
-    "chart.js": "^2.7.2",
-    "csv-stringify": "^3.1.1",
-    "jquery": "^3.3.1",
-    "jsdom": "^11.12.0",
+    "bulma": "^0.8.2",
+    "chart.js": "^2.9.3",
+    "jquery": "^3.5.0",
+    "jsdom": "^16.2.2",
     "miband": "^0.1.4",
-    "ms": "^2.1.1",
+    "ms": "^2.1.2",
     "static-server": "^2.2.1"
   },
   "devDependencies": {
-    "@babel/core": "^7.0.0-beta.56",
-    "@types/web-bluetooth": "0.0.4",
-    "babelify": "^9.0.0",
-    "browserify": "^16.2.2",
-    "nodemon": "^1.18.3",
-    "tsify": "^4.0.0",
-    "typescript": "^3.0.1"
+    "@babel/core": "^7.9.6",
+    "@types/web-bluetooth": "0.0.5",
+    "babelify": "^10.0.0",
+    "browserify": "^16.5.1",
+    "nodemon": "^2.0.3",
+    "tsify": "^4.0.1",
+    "typescript": "^3.8.3"
   }
 }

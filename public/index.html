@@ -2,97 +2,99 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Miband</title>
-    <link rel="stylesheet" href="../public/bulma.min.css">
-    <script src="../public/jquery-3.3.1.min.js"></script>
-    <style>
-        html,
-        body {
-            background-image: linear-gradient(120deg, #a6c0fe 0%, #f68084 100%);
-        }
-        .field-label {
-            text-align: left;
-        }
-        article.tile.is-child.notification.is-gray {
-            -webkit-box-shadow: 0px 10px 120px 0px rgba(0,0,0,0.2);
--moz-box-shadow: 0px 10px 120px 0px rgba(0,0,0,0.2);
-box-shadow: 0px 10px 120px 0px rgba(0,0,0,0.2);
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Miband</title>
+  <link rel="stylesheet" href="../public/bulma.min.css">
+  <script src="../public/jquery-3.3.1.min.js"></script>
+  <style>
+    html,
+    body {
+      background-image: linear-gradient(120deg, #a6c0fe 0%, #f68084 100%);
+    }
+
+    .field-label {
+      text-align: left;
+    }
+
+    article.tile.is-child.notification.is-gray {
+      -webkit-box-shadow: 0px 10px 120px 0px rgba(0, 0, 0, 0.2);
+      -moz-box-shadow: 0px 10px 120px 0px rgba(0, 0, 0, 0.2);
+      box-shadow: 0px 10px 120px 0px rgba(0, 0, 0, 0.2);
+    }
+  </style>
 </head>
 
 <body>
 
-    <div class="hero-body">
-        <section class="container">
-            <div class="sandbox">
-                <div class="tile is-ancestor">
-                    <div class="tile is-parent is-6 is-shady">
-                        <article class="tile is-child notification is-gray">
-                            <p class="title">📜 Data output </p>
-                            <div class="content">
-                                <pre style="display: block; height: 80vh; overflow: auto;" id="output">...</pre>
-                            </div>
-                        </article>
+  <div class="hero-body">
+    <section class="container">
+      <div class="sandbox">
+        <div class="tile is-ancestor">
+          <div class="tile is-parent is-6 is-shady">
+            <article class="tile is-child notification is-gray">
+              <p class="title">📜 Data output </p>
+              <div class="content">
+                <pre style="display: block; height: 80vh; overflow: auto;" id="output">...</pre>
+              </div>
+            </article>
+          </div>
+          <div class="tile is-vertical">
+            <div class="tile is-parent is-shady">
+              <article class="tile is-child notification is-white">
+                <p class="title">⌚💓 MiBand data recolector</p>
+                <p class="subtitle is-gray">version 0.3</p>
+                <div class="content">
+                  <p>You will need a device with BLE connectitity to use this tool</p>
+                  <div class="field-label is-medium">
+                    <p class="label">📝 CSV file name for output</p>
+                  </div>
+                  <div class="field is-horizontal">
+                    <div class="field-body">
+                      <div class="field">
+                        <p class="control">
+                          <input id="name" class="input" placeholder="something">
+                        </p>
+                      </div>
                     </div>
-                    <div class="tile is-vertical">
-                        <div class="tile is-parent is-shady">
-                            <article class="tile is-child notification is-white">
-                                <p class="title">⌚💓 MiBand data recolector</p>
-                                <p class="subtitle is-gray">version 0.2</p>
-                                <div class="content">
-                                    <p>You will need a device with BLE connectitity to use this tool</p>
-                                    <div class="field-label is-medium">
-                                        <p class="label">📝 CSV file name for output</p>
-                                    </div>
-                                    <div class="field is-horizontal">
-                                        <div class="field-body">
-                                            <div class="field">
-                                                <p class="control">
-                                                    <input id="name" class="input" placeholder="something">
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="field-label is-medium">
-                                        <p class="label">⌚ Time (you can use format like "5s, 5m, 1hr...")</p>
-                                    </div>
-                                    <div class="field is-horizontal">
-                                        <div class="field-body">
-                                            <div class="field">
-                                                <p class="control">
-                                                    <input id="time" class="input" placeholder="5m">
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <p class="has-text-grey">Leave blank to run until you press stop button</p>
+                  </div>
+                  <div class="field-label is-medium">
+                    <p class="label">⌚ Time (you can use format like "5s, 5m, 1hr...")</p>
+                  </div>
+                  <div class="field is-horizontal">
+                    <div class="field-body">
+                      <div class="field">
+                        <p class="control">
+                          <input id="time" class="input" placeholder="5m">
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                  <p class="has-text-grey">Leave blank to run until you press stop button</p>
 
-                                    <br>
-                                    <p class="has-text-centered">
-                                        <a href="#" id="start" class="button is-medium is-success">
-                                            Start ✅
-                                        </a>
-                                        <a href="#" id="stop" hidden class="button is-medium is-danger">
-                                            Stop ❌
-                                        </a>
-                                    </p>
-                                </div>
-                                <div class="chart-container" style="height:400px; width:auto;">
-                                    <canvas id="chart"></canvas>
-                                </div>
-                            </article>
-                        </div>
-                    </div>
+                  <br>
+                  <p class="has-text-centered">
+                    <a href="#" id="start" class="button is-medium is-success">
+                      Start ✅
+                    </a>
+                    <a href="#" id="stop" hidden class="button is-medium is-danger">
+                      Stop ❌
+                    </a>
+                  </p>
                 </div>
+                <div class="chart-container" style="height:400px; width:auto;">
+                  <canvas id="chart"></canvas>
+                </div>
+              </article>
             </div>
-        </section>
-    </div>
-    <script src="../node_modules/chart.js/dist/Chart.bundle.min.js"></script>
-    <script src="../public/bundle.js"></script>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script src="../node_modules/chart.js/dist/Chart.bundle.min.js"></script>
+  <script src="../public/bundle.js"></script>
 </body>
 
 </html>
