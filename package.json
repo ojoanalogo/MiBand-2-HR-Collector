@@ -12,7 +12,7 @@
   "license": "ISC",
   "dependencies": {
     "bulma": "^0.8.2",
-    "chart.js": "^2.9.3",
+    "chart.js": "^2.9.4",
     "jquery": "^3.5.0",
     "jsdom": "^16.2.2",
     "miband": "^0.1.4",
